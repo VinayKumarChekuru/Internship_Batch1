@@ -25,6 +25,7 @@
 int main(void)
 {
     /* Loop forever */
+	// hai
 	for(;;);
 
 }
