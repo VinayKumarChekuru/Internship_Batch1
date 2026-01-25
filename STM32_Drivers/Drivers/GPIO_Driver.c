@@ -58,4 +58,51 @@ void GPIO_Clk_EnorDi(GPIO_RegDef_t *pGPIOx,uint8_t EnorDi)
    }
 }
 
+/*
+ *
+ * @name : GPIO_Init
+ * @return : void
+ * @parameters: GPIO_Handler_t GPIO_Handler
+ * @Description :
+ */
+
+void GPIO_Init(GPIO_Handler_t GPIO_Handler)
+{
+
+	//Configure Mode of GPIO Pin
+	GPIO_Handler.PGPIOx->MODER |= (GPIO_Handler.GPIO_Config.Mode << (2*GPIO_Handler.GPIO_Config.Pin_Num));
+
+	//Configure GPIO Output type (Push Pull or Open Drain)
+    GPIO_Handler.PGPIOx->OTYPER |= (GPIO_Handler.GPIO_Config.OutPut_Type << (GPIO_Handler.GPIO_Config.Pin_Num));
+
+	//Configure GPIO Output Speed
+    GPIO_Handler.PGPIOx->OSPEEDR |= (GPIO_Handler.GPIO_Config.OutPut_Speed << (2*GPIO_Handler.GPIO_Config.Pin_Num));
+
+	//Configure GPIO PullUp and PullDown register
+    GPIO_Handler.PGPIOx->PUPDR |= (GPIO_Handler.GPIO_Config.PuPd << (2*GPIO_Handler.GPIO_Config.Pin_Num));
+
+}
+
+
+void GPIO_Deint(GPIO_RegDef_t *PGPIOx)
+{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
