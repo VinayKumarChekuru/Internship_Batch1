@@ -1,8 +1,18 @@
 
 
 
+
+
 #include"GPIO_Driver.h"
 
+
+/*
+ * @name        : GPIO_Clk_EnorDi
+ * @return      : void
+ * @parameters  : GPIO_RegDef_t *pGPIOx, uint8_t EnorDi
+ * @Description : This function manages the clock gating for the specified GPIO port.
+ * It interacts with the RCC (Reset and Clock Control) registers to
+ * toggle the peripheral clock based on the EnorDi input.*/
 
 
 void GPIO_Clk_EnorDi(GPIO_RegDef_t *pGPIOx,uint8_t EnorDi)
@@ -60,12 +70,12 @@ void GPIO_Clk_EnorDi(GPIO_RegDef_t *pGPIOx,uint8_t EnorDi)
 }
 
 /*
- *
- * @name : GPIO_Init
- * @return : void
- * @parameters: GPIO_Handler_t GPIO_Handler
- * @Description :
- */
+ * @name        : GPIO_Init
+ * @return      : void
+ * @parameters  : GPIO_Handler_t GPIO_Handler
+ * @Description : Performs the hardware initialization of the GPIO pin. This involves
+ * setting the mode, output type, speed, and resistor configuration
+ * defined in the GPIO_Handler structure.*/
 
 void GPIO_Init(GPIO_Handler_t GPIO_Handler)
 {
@@ -85,11 +95,28 @@ void GPIO_Init(GPIO_Handler_t GPIO_Handler)
 }
 
 
-void GPIO_Deint(GPIO_RegDef_t *PGPIOx)
+/*
+ * @name        : GPIO_Deint
+ * @return      : void
+ * @parameters  : GPIO_RegDef_t *pGPIOx
+ * @Description : This function performs a software reset on the GPIO peripheral's
+ * registers, bringing them back to their default reset values via
+ * the RCC reset bus.
+ */
+void GPIO_Deint(GPIO_RegDef_t *pGPIOx)
 {
-
+   /* Trigger the reset bit for the corresponding GPIO port in the RCC reset register */
+   if(pGPIOx == pGPIOA)      {
+	   pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOAEN); }
+   else if(pGPIOx == pGPIOB) {
+	   pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOBEN); }
+   else if(pGPIOx == pGPIOC) {
+	   pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOCEN); }
+   else if(pGPIOx == pGPIOD) {
+	   pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIODEN); }
+   else if(pGPIOx == pGPIOF) {
+	   pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOFEN); }
 }
-
 
 
 
