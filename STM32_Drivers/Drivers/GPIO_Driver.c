@@ -15,6 +15,7 @@
  * It toggles the AHBENR register bits in the RCC block
  * depending on the requested EnorDi state.
  */
+
 void GPIO_Clk_EnorDi(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi)
 {
     if(EnorDi == ENABLE)
