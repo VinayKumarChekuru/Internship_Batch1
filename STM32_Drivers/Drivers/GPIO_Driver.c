@@ -20,20 +20,30 @@ void GPIO_Clk_EnorDi(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi)
     if(EnorDi == ENABLE)
     {
         // Logic to turn clock ON
-        if(pGPIOx == pGPIOA)      { pRCC->AHBENR |= (SET << RCC_AHBENR_GPIOAEN); }
-        else if(pGPIOx == pGPIOB) { pRCC->AHBENR |= (SET << RCC_AHBENR_GPIOBEN); }
-        else if(pGPIOx == pGPIOC) { pRCC->AHBENR |= (SET << RCC_AHBENR_GPIOCEN); }
-        else if(pGPIOx == pGPIOD) { pRCC->AHBENR |= (SET << RCC_AHBENR_GPIODEN); }
-        else if(pGPIOx == pGPIOF) { pRCC->AHBENR |= (SET << RCC_AHBENR_GPIOFEN); }
+        if(pGPIOx == pGPIOA)      {
+        	pRCC->AHBENR |= (SET << RCC_AHBENR_GPIOAEN); }
+        else if(pGPIOx == pGPIOB) {
+        	pRCC->AHBENR |= (SET << RCC_AHBENR_GPIOBEN); }
+        else if(pGPIOx == pGPIOC) {
+        	pRCC->AHBENR |= (SET << RCC_AHBENR_GPIOCEN); }
+        else if(pGPIOx == pGPIOD) {
+        	pRCC->AHBENR |= (SET << RCC_AHBENR_GPIODEN); }
+        else if(pGPIOx == pGPIOF) {
+        	pRCC->AHBENR |= (SET << RCC_AHBENR_GPIOFEN); }
     }
     else
     {
         // Logic to turn clock OFF
-        if(pGPIOx == pGPIOA)      { pRCC->AHBENR &= ~(SET << RCC_AHBENR_GPIOAEN); }
-        else if(pGPIOx == pGPIOB) { pRCC->AHBENR &= ~(SET << RCC_AHBENR_GPIOBEN); }
-        else if(pGPIOx == pGPIOC) { pRCC->AHBENR &= ~(SET << RCC_AHBENR_GPIOCEN); }
-        else if(pGPIOx == pGPIOD) { pRCC->AHBENR &= ~(SET << RCC_AHBENR_GPIODEN); }
-        else if(pGPIOx == pGPIOF) { pRCC->AHBENR &= ~(SET << RCC_AHBENR_GPIOFEN); }
+        if(pGPIOx == pGPIOA)      {
+        	pRCC->AHBENR &= ~(SET << RCC_AHBENR_GPIOAEN); }
+        else if(pGPIOx == pGPIOB) {
+        	pRCC->AHBENR &= ~(SET << RCC_AHBENR_GPIOBEN); }
+        else if(pGPIOx == pGPIOC) {
+        	pRCC->AHBENR &= ~(SET << RCC_AHBENR_GPIOCEN); }
+        else if(pGPIOx == pGPIOD) {
+        	pRCC->AHBENR &= ~(SET << RCC_AHBENR_GPIODEN); }
+        else if(pGPIOx == pGPIOF) {
+        	pRCC->AHBENR &= ~(SET << RCC_AHBENR_GPIOFEN); }
     }
 }
 
@@ -60,6 +70,8 @@ void GPIO_Init(GPIO_Handler_t GPIO_Handler)
     GPIO_Handler.PGPIOx->PUPDR |= GPIO_Handler.GPIO_Config.PuPd << (2 * GPIO_Handler.GPIO_Config.Pin_Num);
 }
 
+
+
 /*
  * @name        : GPIO_Deint
  * @return      : void
@@ -69,11 +81,16 @@ void GPIO_Init(GPIO_Handler_t GPIO_Handler)
  */
 void GPIO_Deint(GPIO_RegDef_t *pGPIOx)
 {
-    if(pGPIOx == pGPIOA)      { pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOAEN); }
-    else if(pGPIOx == pGPIOB) { pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOBEN); }
-    else if(pGPIOx == pGPIOC) { pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOCEN); }
-    else if(pGPIOx == pGPIOD) { pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIODEN); }
-    else if(pGPIOx == pGPIOF) { pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOFEN); }
+    if(pGPIOx == pGPIOA)      {
+    	pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOAEN); }
+    else if(pGPIOx == pGPIOB) {
+    	pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOBEN); }
+    else if(pGPIOx == pGPIOC) {
+    	pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOCEN); }
+    else if(pGPIOx == pGPIOD) {
+    	pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIODEN); }
+    else if(pGPIOx == pGPIOF) {
+    	pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOFEN); }
 }
 
 
