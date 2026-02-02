@@ -178,6 +178,6 @@ uint16_t GPIO_Read_From_Port(GPIO_RegDef_t *pGPIOx)
 uint8_t GPIO_Read_From_Pin(GPIO_RegDef_t *pGPIOx,uint8_t PinNum)
 {
 
-	return (uint8_t) ((pGPIOx->IDR >> PinNum)&(0X00000001));//or simply write 1 instead of 0X00000001
+	return (uint8_t) ((pGPIOx->IDR >> PinNum)&(0X00000001)); //or simply write 1 instead of 0X00000001
 
 }
