@@ -99,25 +99,85 @@ void GPIO_Init(GPIO_Handler_t GPIO_Handler)
  */
 void GPIO_Deint(GPIO_RegDef_t *pGPIOx)
 {
+
 	if(pGPIOx == pGPIOA)
 	{
-		pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOAEN);
+		pRCC->AHBRSTR |= (SET << GPIOPARST);
 	}
 	else if(pGPIOx == pGPIOB)
 	{
-		pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOBEN);
+		pRCC->AHBRSTR |= (SET << GPIOPBRST);
 	}
 	else if(pGPIOx == pGPIOC)
 	{
-		pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOCEN);
+		pRCC->AHBRSTR |= (SET << GPIOPCRST);
 	}
 	else if(pGPIOx == pGPIOD)
 	{
-		pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIODEN);
+		pRCC->AHBRSTR |= (SET << GPIOPDRST);
 	}
 	else if(pGPIOx == pGPIOF)
 	{
-		pRCC->AHBRSTR |= (SET << RCC_AHBENR_GPIOFEN);
+		pRCC->AHBRSTR |= (SET << GPIOPFRST);
 	}
+
+}
+
+/*
+ * @name		:GPIO_Write_To_Port
+ * @return		:void
+ * @parameters	:GPIO_RegDef_t, uint16_t
+ * @Description	:This function Writes the data to a Port
+ * 				 based on provided GPIO Register reference.
+ */
+void GPIO_Write_To_Port(GPIO_RegDef_t *pGPIOx,uint16_t Data)
+{
+
+	pGPIOx->ODR = Data;//Over writes the data
+
+}
+
+/*
+ * @name		:GPIO_Write_To_Pin
+ * @return		:void
+ * @parameters	:GPIO_RegDef_t, uint8_t, uint8_t
+ * @Description	:This function Writes the data to a Port specific
+ * 				 pin based on provided GPIO Register reference.
+ */
+void GPIO_Write_To_Pin(GPIO_RegDef_t *pGPIOx,uint8_t PinNum,uint8_t Data)
+{
+
+	// clear the previous data Before writing to the Data
+	pGPIOx->ODR &= ~(SET << PinNum);
+	//Write the Data to Pin
+	pGPIOx->ODR |= (Data << PinNum);
+
+}
+
+/*
+ * @name		:GPIO_Read_From_Port
+ * @return		:uint16_t
+ * @parameters	:GPIO_RegDef_t
+ * @Description	:This function Reads the data from a Port specific
+ * 				 pin based on provided GPIO Register reference.
+ */
+uint16_t GPIO_Read_From_Port(GPIO_RegDef_t *pGPIOx)
+{
+
+	return (uint16_t)(pGPIOx->IDR);
+
+}
+
+/*
+ * @name		:GPIO_Read_From_Pin
+ * @return		:uint8_t
+ * @parameters	:GPIO_RegDef_t, uint8_t, uint8_t
+ * @Description	:This function Reads the data from a Port specific pin based on
+ * 				 provided GPIO Register reference and Pin number.
+ */
+uint8_t GPIO_Read_From_Pin(GPIO_RegDef_t *pGPIOx,uint8_t PinNum)
+{
+
+	return (uint8_t) ((pGPIOx->IDR >> PinNum)&(0X00000001));//or simply write 1 instead of 0X00000001
 
 }
