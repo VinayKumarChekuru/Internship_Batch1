@@ -31,7 +31,7 @@
 #define RCC_AHBENR_GPIOBEN     18
 #define RCC_AHBENR_GPIOCEN     19
 #define RCC_AHBENR_GPIODEN     20
-#define RCC_AHBENR_GPIOEEN     21
+#define RCC_AHBENR_GPIOEEN     21//Not Available
 #define RCC_AHBENR_GPIOFEN     22
 
 /*
